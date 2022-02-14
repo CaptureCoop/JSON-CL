@@ -48,6 +48,25 @@ function createMarkdown() {
 		var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 		var dateString = `${day}.${month}.${year} ${hours}:${minutes} (${timezone})`;
 		input += `\n## [${e.version}] (${e.url}) - ${dateString}`;
+		
+		if(e.added.length > 0) {
+			input += "\n\n### Added";
+			e.added.forEach(e => input += "\n- " + e);
+			input += "\n";
+		}
+
+		if(e.changed.length > 0) {
+			input += "\n### Changed";
+			e.changed.forEach(e => input += "\n- " + e);
+			input += "\n";
+		}
+
+		if(e.removed.length > 0) {
+			input += "\n### Removed";
+			e.removed.forEach(e => input += "\n- " + e);
+		}
+		
+		input += "\n\n\n";
 	});
 	
 	out.value = input;

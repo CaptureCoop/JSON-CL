@@ -47,7 +47,11 @@ function createMarkdown() {
 		var minutes = prettyPrintDateNr(date.getMinutes());
 		var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 		var dateString = `${day}.${month}.${year} ${hours}:${minutes} (${timezone})`;
-		input += `\n## [${e.version}] (${e.url}) - ${dateString}`;
+		input += `\n## [${e.version}](${e.url}) - ${dateString}`;
+		
+		if(e.title) {
+			input += "\n\n### " + e.title;
+		}
 		
 		if(e.added.length > 0) {
 			input += "\n\n### Added";

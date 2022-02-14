@@ -5,7 +5,7 @@
 var codeEditor;
 var lineCounter;
 
-window.onload = function() {
+function loadEditor(){
 	codeEditor = document.getElementById('codeEditor');
 	lineCounter = document.getElementById('lineCounter');
 	

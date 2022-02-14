@@ -131,7 +131,8 @@ function selectMarkdown() {
 }
 
 window.onload = function() {
-	var textfield = document.getElementById("jsonTextField");
+	loadEditor();
+	var textfield = document.getElementById("codeEditor");
 	var textfieldListener = function() {
 		parseJSON(textfield.value);
 	};

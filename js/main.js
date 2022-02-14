@@ -100,36 +100,36 @@ function parseJSON(force) {
 			releases.push(r);
 		}
 		createMarkdown();
-		clearAlerts();
-		showAlert("Parsing complete!");
+		clearLog();
+		printLog("Parsing complete!");
 	} catch(err) {
-		showAlert(err);
+		printLog(err);
 	}
 }
 
-var alerts = "";
-function showAlert(x) {
+var logCache = "";
+function printLog(x) {
 	if(x == undefined) return;
 	var date = new Date(Date.now());
 	var hours = prettyPrintDateNr(date.getHours());
 	var minutes = prettyPrintDateNr(date.getMinutes());
 	var seconds = prettyPrintDateNr(date.getSeconds());
 	var time = `${hours}:${minutes}:${seconds}`;
-	alerts += "<label>" + time + ": " + x + "</label>";
-	document.getElementById("alerts").innerHTML = alerts;
+	logCache += "<label>" + time + ": " + x + "</label>";
+	document.getElementById("log").innerHTML = logCache;
 }
 
-function clearAlerts() {
-	alerts = "";
-	document.getElementById("alerts").innerHTML = alerts;
+function clearLog() {
+	logCache = "";
+	document.getElementById("log").innerHTML = logCache;
 }
 
 function copyMarkdown() {
 	var markdown = document.getElementById("markdownTextField");
 	navigator.clipboard.writeText(markdown.value).then(function() {
-		showAlert("Copied markdown to clipboard!");
+		printLog("Copied markdown to clipboard!");
 	}, function(err) {
-		showAlert(err);
+		printLog(err);
 	});
 }
 
@@ -137,7 +137,7 @@ function selectMarkdown() {
 	var markdown = document.getElementById("markdownTextField");
 	markdown.focus();
 	markdown.select();
-	showAlert("Selected markdown");
+	printLog("Selected markdown");
 }
 
 window.onload = function() {

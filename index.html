@@ -15,7 +15,7 @@
 			<p>This website is hosted with GitHub Pages. You can find the source code <a href="https://github.com/CaptureCoop/JSON-CL" target="_blank">here</a>.</p>
 			</br>
 			<p>The JSON input needs to be formatted correctly in order to work.</p>
-			<p>You can find alerts under the code editor, which can help you if you are stuck.</p>
+			<p>You can find the log under the code editor, which can help you if you are stuck.</p>
 			<p><a href="./example-cl.json" target="_blank">Here's</a> an example json file.</p>
 			</br></br>
 			
@@ -25,9 +25,9 @@
 				<textarea id='codeEditor' wrap='off'></textarea>
 			</div>
 			<button onclick="parseJSON(true)">Parse</button>
-			<button onclick="clearAlerts()">Clear alerts</button>
-			<label>Alerts:</label>
-			<label id="alerts"></label>
+			<button onclick="clearLog()">Clear log</button>
+			<label>Log:</label>
+			<label id="log"></label>
 			
 			<label style="margin-top:50px;">Markdown Output</label>
 			<button onclick="copyMarkdown()">Copy</button>

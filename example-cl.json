@@ -16,7 +16,7 @@
 			"url": "https://github.com/CaptureCoop/SnipSniper/releases/tag/3.9.3",
 			"title": "small update",
 			"added": ["Did something", "Amazing!"],
-			"changed": [],
+			"changed": ["Some stuff", "Alot", "nothing at all"],
 			"removed": ["Removed everything...."]
 		}
 	]

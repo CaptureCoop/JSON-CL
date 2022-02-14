@@ -93,14 +93,17 @@ function parseJSON(force) {
 		for(var i = 0; i < jsonOBJ.releases.length; i++) {
 			var o = jsonOBJ.releases[i];
 			var r = new Release(o.release_time, o.version, o.title, o.url);
-			o.added.forEach(e => r.insertAdded(e));
-			o.changed.forEach(e => r.insertChanged(e));
-			o.removed.forEach(e => r.insertRemoved(e));
+			try {
+				o.added.forEach(e => r.insertAdded(e));
+				o.changed.forEach(e => r.insertChanged(e));
+				o.removed.forEach(e => r.insertRemoved(e));
+			} catch(err) {
+				printLog("Missing element! This is not fatal. (" + err + ")");
+			}
 			
 			releases.push(r);
 		}
 		createMarkdown();
-		clearLog();
 		printLog("Parsing complete!");
 	} catch(err) {
 		printLog(err);

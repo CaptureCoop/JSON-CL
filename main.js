@@ -1,10 +1,14 @@
 var rawJSON;
 var releases = [];
 
+var title;
+var description;
+
 class Release {
-	constructor(release_time, version, title) {
+	constructor(release_time, version, title, url) {
 		this.release_time = release_time;
 		this.version = version;
+		this.url = url;
 		this.title = title;
 		this.added = [];
 		this.changed = [];
@@ -24,8 +28,29 @@ class Release {
 	}
 }
 
+function prettyPrintDateNr(d) {
+	if(d < 10)
+		return "0" + d;
+	return d;
+}
+
 function createMarkdown() {
 	var out = document.getElementById("markdownTextField");
+	var input = `# ${title}\n${description}`;
+
+	releases.forEach(e => {
+		var date = new Date(e.release_time * 1000);
+		var day = prettyPrintDateNr(date.getDate());
+		var month = prettyPrintDateNr(date.getMonth() + 1);
+		var year = date.getFullYear();
+		var hours = prettyPrintDateNr(date.getHours());
+		var minutes = prettyPrintDateNr(date.getMinutes());
+		var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+		var dateString = `${day}.${month}.${year} ${hours}:${minutes} (${timezone})`;
+		input += `\n## [${e.version}] (${e.url}) - ${dateString}`;
+	});
+	
+	out.value = input;
 }
 
 function parseJSON(json) {
@@ -38,24 +63,27 @@ function parseJSON(json) {
 	
 	try {
 		var jsonOBJ = JSON.parse(rawJSON);
-		for(var i = 0; i < jsonOBJ.length; i++) {
-			var o = jsonOBJ[i];
-			var r = new Release(o.release_time, o.version, o.title);
+		title = jsonOBJ.title;
+		description = jsonOBJ.description;
+		for(var i = 0; i < jsonOBJ.releases.length; i++) {
+			var o = jsonOBJ.releases[i];
+			var r = new Release(o.release_time, o.version, o.title, o.url);
 			o.added.forEach(e => r.insertAdded(e));
 			o.changed.forEach(e => r.insertChanged(e));
 			o.removed.forEach(e => r.insertRemoved(e));
 			
 			releases.push(r);
 		}
-		console.log(releases);
-	} catch(err) { }
+		createMarkdown();
+	} catch(err) {
+		console.log(err);
+	}
 }
 
 window.onload = function() {
 	var textfield = document.getElementById("jsonTextField");
 	var textfieldListener = function() {
 		parseJSON(document.getElementById("jsonTextField").value);
-		createMarkdown();
 	};
 	textfield.onkeyup = textfieldListener;
 	textfield.onblur = textfieldListener;

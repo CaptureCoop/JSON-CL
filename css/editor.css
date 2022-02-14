@@ -1,3 +1,7 @@
+//Credit and thanks to:
+//https://medium.com/weekly-webtips/enable-line-numbering-to-any-html-textarea-35e15ea320e2
+
+
 #codeEditor, #lineCounter {
     font-family: lucida console, courier new, courier, monospace;
     margin: 0;

@@ -3,23 +3,32 @@
 //This code was modified to work with multiple code editors
 
 
-var codeEditor = document.getElementById('codeEditor');
-var lineCounter = document.getElementById('lineCounter');
+var codeEditor;
+var lineCounter;
 
-codeEditor.addEventListener('scroll', () => {
-	lineCounter.scrollTop = codeEditor.scrollTop;
-	lineCounter.scrollLeft = codeEditor.scrollLeft;
-});
+window.onload = function() {
+	codeEditor = document.getElementById('codeEditor');
+	lineCounter = document.getElementById('lineCounter');
+	
+	codeEditor.addEventListener('scroll', () => {
+		lineCounter.scrollTop = codeEditor.scrollTop;
+		lineCounter.scrollLeft = codeEditor.scrollLeft;
+	});
 
-codeEditor.addEventListener('keydown', (e) => {
-	let {keyCode} = e;
-	let {value, selectionStart, selectionEnd} = codeEditor;
-	if (keyCode === 9) {  // TAB = 9
-		e.preventDefault();
-		codeEditor.value = value.slice(0, selectionStart) + '\t' + value.slice(selectionEnd);
-		codeEditor.setSelectionRange(selectionStart+2, selectionStart+2)
-	}
+	codeEditor.addEventListener('keydown', (e) => {
+		let {keyCode} = e;
+		let {value, selectionStart, selectionEnd} = codeEditor;
+		if (keyCode === 9) {  // TAB = 9
+			e.preventDefault();
+			codeEditor.value = value.slice(0, selectionStart) + '\t' + value.slice(selectionEnd);
+			codeEditor.setSelectionRange(selectionStart+2, selectionStart+2)
+		}
+	});
+	
+	codeEditor.addEventListener('input', () => {
+	line_counter();
 });
+}
 
 var lineCountCache = 0;
 function line_counter() {
@@ -33,7 +42,3 @@ function line_counter() {
 	}
 	lineCountCache = lineCount;
 }
-
-codeEditor.addEventListener('input', () => {
-	line_counter();
-});

@@ -36,7 +36,8 @@ function prettyPrintDateNr(d) {
 
 function createMarkdown() {
 	var out = document.getElementById("markdownTextField");
-	var input = `# ${title}\n${description}`;
+	var input = "[//]: # (Made with JSON-CL. JSON-CL.github.io)\n\n\n"
+	input += `# ${title}\n${description}`;
 
 	releases.forEach(e => {
 		var date = new Date(e.release_time * 1000);

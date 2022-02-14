@@ -1,0 +1,17 @@
+[
+	{
+		"release_time": "1644828300",
+		"version": "3.9.4",
+		"title": "beeg update",
+		"added": ["added smth", "i guess"],
+		"changed": [],
+		"removed": ["Nothing much, but something"]
+	}, {
+		"release_time": "1644823100",
+		"version": "3.9.3",
+		"title": "small update",
+		"added": ["Did something", "Amazing!"],
+		"changed": [],
+		"removed": ["Removed everything...."]
+	}
+]

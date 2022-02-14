@@ -99,9 +99,35 @@ function parseJSON(json) {
 			releases.push(r);
 		}
 		createMarkdown();
+		showAlert("Parsing complete!");
 	} catch(err) {
-		console.log(err);
+		showAlert(err);
 	}
+}
+
+function showAlert(x) {
+	var date = new Date(Date.now());
+	var hours = prettyPrintDateNr(date.getHours());
+	var minutes = prettyPrintDateNr(date.getMinutes());
+	var seconds = prettyPrintDateNr(date.getSeconds());
+	var time = `${hours}:${minutes}:${seconds}`;
+	document.getElementById("alerts").innerHTML = time + ": " + x;
+}
+
+function copyMarkdown() {
+	var markdown = document.getElementById("markdownTextField");
+	navigator.clipboard.writeText(markdown.value).then(function() {
+		showAlert("Copied markdown to clipboard!");
+	}, function(err) {
+		showAlert(err);
+	});
+}
+
+function selectMarkdown() {
+	var markdown = document.getElementById("markdownTextField");
+	markdown.focus();
+	markdown.select();
+	showAlert("Selected markdown");
 }
 
 window.onload = function() {

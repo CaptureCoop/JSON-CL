@@ -1,11 +1,22 @@
 <html>
 	<head>
-		<title>JSON -> Markdown</title>
+		<title>JSON-CL</title>
 		<link rel="stylesheet" href="main.css">
 		<script src="main.js"></script> 
 	</head>
 	<body>
-		<textarea id="jsonTextField"></textarea>
-		<textarea id="markdownTextField" readonly></textarea>
+		<div align="center">
+			<h1>JSON-CL</h1>
+			<label>JSON Input</label>
+			<textarea id="jsonTextField"></textarea>
+			<label>Alerts:</label>
+			<label id="alerts">Waiting for user input...</label>
+			
+			<label style="margin-top:50px;">Markdown Output</label>
+			<button onclick="copyMarkdown()">Copy</button>
+			<button onclick="selectMarkdown()">Select all</button>
+			
+			<textarea id="markdownTextField" readonly></textarea>
+		</div>
 	</body>
 </html>

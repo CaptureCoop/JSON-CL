@@ -1,6 +1,5 @@
 //Credit and thanks to:
 //https://medium.com/weekly-webtips/enable-line-numbering-to-any-html-textarea-35e15ea320e2
-//This code was modified to work with multiple code editors
 
 
 var codeEditor;

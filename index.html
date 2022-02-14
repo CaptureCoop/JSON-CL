@@ -24,8 +24,10 @@
 				<textarea id='lineCounter' wrap='off' readonly>1.</textarea>
 				<textarea id='codeEditor' wrap='off'></textarea>
 			</div>
+			<button onclick="parseJSON(true)">Parse</button>
+			<button onclick="clearAlerts()">Clear alerts</button>
 			<label>Alerts:</label>
-			<label id="alerts">Waiting for user input...</label>
+			<label id="alerts"></label>
 			
 			<label style="margin-top:50px;">Markdown Output</label>
 			<button onclick="copyMarkdown()">Copy</button>

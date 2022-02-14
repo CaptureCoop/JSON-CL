@@ -77,9 +77,10 @@ function createMarkdown() {
 	out.value = input;
 }
 
-function parseJSON(json) {
+function parseJSON(force) {
+	var json = document.getElementById("codeEditor").value;
 	//Only parse when different
-	if(rawJSON == json)
+	if(rawJSON == json && !force)
 		return;
 	
 	rawJSON = json;
@@ -99,19 +100,28 @@ function parseJSON(json) {
 			releases.push(r);
 		}
 		createMarkdown();
+		clearAlerts();
 		showAlert("Parsing complete!");
 	} catch(err) {
 		showAlert(err);
 	}
 }
 
+var alerts = "";
 function showAlert(x) {
+	if(x == undefined) return;
 	var date = new Date(Date.now());
 	var hours = prettyPrintDateNr(date.getHours());
 	var minutes = prettyPrintDateNr(date.getMinutes());
 	var seconds = prettyPrintDateNr(date.getSeconds());
 	var time = `${hours}:${minutes}:${seconds}`;
-	document.getElementById("alerts").innerHTML = time + ": " + x;
+	alerts += "<label>" + time + ": " + x + "</label>";
+	document.getElementById("alerts").innerHTML = alerts;
+}
+
+function clearAlerts() {
+	alerts = "";
+	document.getElementById("alerts").innerHTML = alerts;
 }
 
 function copyMarkdown() {
@@ -134,7 +144,7 @@ window.onload = function() {
 	loadEditor();
 	var textfield = document.getElementById("codeEditor");
 	var textfieldListener = function() {
-		parseJSON(textfield.value);
+		parseJSON(false);
 	};
 	textfield.onkeyup = textfieldListener;
 	textfield.onblur = textfieldListener;

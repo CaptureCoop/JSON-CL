@@ -133,7 +133,7 @@ function selectMarkdown() {
 window.onload = function() {
 	var textfield = document.getElementById("jsonTextField");
 	var textfieldListener = function() {
-		parseJSON(document.getElementById("jsonTextField").value);
+		parseJSON(textfield.value);
 	};
 	textfield.onkeyup = textfieldListener;
 	textfield.onblur = textfieldListener;

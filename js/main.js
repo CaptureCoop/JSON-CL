@@ -95,11 +95,15 @@ function parseJSON(force) {
 			var r = new Release(o.release_time, o.version, o.title, o.url);
 			try {
 				o.added.forEach(e => r.insertAdded(e));
+			} catch(err) { }
+			
+			try {
 				o.changed.forEach(e => r.insertChanged(e));
+			} catch(err) { }
+			
+			try {
 				o.removed.forEach(e => r.insertRemoved(e));
-			} catch(err) {
-				printLog("Missing element! This is not fatal. (" + err + ")");
-			}
+			} catch(err) { }
 			
 			releases.push(r);
 		}

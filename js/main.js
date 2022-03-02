@@ -71,7 +71,6 @@ function createMarkdown() {
 			e.removed.forEach(e => input += "\n- " + e);
 		}
 		
-		input += "\n\n\n";
 	});
 	
 	out.value = input;
